@@ -22,6 +22,20 @@ Receptor:  [CANAL] Pacote descartado artificialmente!
 /status -> Mensagens pendentes: 1
 ```
 
+**Print realizado no terminal:**
+
+```text
+==========================================================
+ RECEPTOR UDP - EVIDENCIA DA ATIVIDADE
+ Porta: 5001 | Perda simulada: 40.0%
+ Aguardando mensagens...
+==========================================================
+
+[DESCARTE] Pacote descartado artificialmente!
+```
+
+No remetente, o comando `/status` mostrou `Mensagens pendentes: 1` e a mensagem `ID 1: mensagem de teste UDP [PENDENTE - CHECK CINZA]`.
+
 ## 3. Captura de tela 2: reenvio e confirmação
 
 Com a mensagem ainda pendente, o comando `/reenviar` envia novamente todos os registros do dicionário. Quando uma retransmissão chega ao receptor, ele imprime a mensagem e devolve o recibo. O remetente então remove a mensagem da lista e mostra a confirmação de entrega.
@@ -36,6 +50,16 @@ Remetente: [✓✓ Entregue] ID 1: mensagem de teste
 ```
 
 As capturas reais desses dois momentos devem acompanhar este relatório na entrega do repositório.
+
+**Print realizado no terminal:**
+
+```text
+[RECEBIDA] ID 1: mensagem de teste UDP
+[ACK ENVIADO] DELIVERED|1
+[REENVIADO] ID 1: mensagem de teste UDP
+```
+
+O teste também confirmou o protocolo com `DELIVERED|42` recebido pelo remetente. Para a entrega final, recomenda-se anexar as imagens dos dois terminais junto com este PDF, pois os blocos acima são a transcrição dos prints e não substituem uma captura de tela visual.
 
 ## 4. Aplicação x TCP
 

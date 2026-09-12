@@ -33,7 +33,7 @@ def listen_receipts(sock):
                         texto = pending_messages.pop(msg_id)
 
                         print(
-                            f"\n[✓✓ Entregue] "
+                            f"\n[ACK RECEBIDO - ENTREGUE] "
                             f"ID {msg_id}: {texto}"
                         )
 
@@ -59,9 +59,11 @@ def run_chat_sender():
 
         listener.start()
 
-        print("=== Mini-Chat UDP ===")
-        print("/status -> mensagens pendentes")
-        print("/reenviar -> reenviar mensagens pendentes")
+        print("=" * 58)
+        print(" REMETENTE UDP - EVIDENCIA DA ATIVIDADE")
+        print(" /status   -> consultar mensagens pendentes")
+        print(" /reenviar -> reenviar mensagens pendentes")
+        print("=" * 58)
 
         while True:
             try:
@@ -76,15 +78,13 @@ def run_chat_sender():
                 if user_input == "/status":
 
                     with lock:
-                        print(
-                            f"\nMensagens pendentes: "
-                            f"{len(pending_messages)}"
-                        )
+                        print("\n[STATUS] RESUMO DA ENTREGA")
+                        print(f"Mensagens pendentes: {len(pending_messages)}")
 
                         for msg_id, texto in pending_messages.items():
                             print(
                                 f"ID {msg_id}: {texto} "
-                                "[Pendente]"
+                                "[PENDENTE - CHECK CINZA]"
                             )
 
                     continue
@@ -112,7 +112,7 @@ def run_chat_sender():
                         )
 
                         print(
-                            f"[Reenviado] "
+                            f"[REENVIADO] "
                             f"ID {msg_id}: {texto}"
                         )
 
@@ -136,7 +136,7 @@ def run_chat_sender():
                 )
 
                 print(
-                    f"[Pendente] "
+                    f"\n[PENDENTE - CHECK CINZA] "
                     f"ID {current_id}: {user_input}"
                 )
 

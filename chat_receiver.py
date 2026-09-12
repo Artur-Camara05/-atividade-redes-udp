@@ -11,10 +11,11 @@ def run_chat_receiver():
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         s.bind((HOST, PORT))
 
-        print(
-            f"[Chat Server] Online na porta {PORT} "
-            f"(Drop Rate: {DROP_RATE * 100}%)..."
-        )
+        print("=" * 58)
+        print(" RECEPTOR UDP - EVIDENCIA DA ATIVIDADE")
+        print(f" Porta: {PORT} | Perda simulada: {DROP_RATE * 100}%")
+        print(" Aguardando mensagens...")
+        print("=" * 58)
 
         while True:
             # Aguarda uma mensagem
@@ -22,7 +23,7 @@ def run_chat_receiver():
 
             # Simula perda de pacote
             if random.random() < DROP_RATE:
-                print("[CANAL] Pacote descartado artificialmente!")
+                print("\n[DESCARTE] Pacote descartado artificialmente!")
                 continue
 
             raw_message = data.decode("utf-8")
@@ -35,7 +36,7 @@ def run_chat_receiver():
                 msg_id = partes[1]
                 texto = partes[2]
 
-                print(f"[MSG {msg_id}] {texto}")
+                print(f"\n[RECEBIDA] ID {msg_id}: {texto}")
 
                 # Monta confirmação de entrega
                 recibo = f"DELIVERED|{msg_id}"
@@ -45,6 +46,7 @@ def run_chat_receiver():
                     recibo.encode("utf-8"),
                     addr
                 )
+                print(f"[ACK ENVIADO] DELIVERED|{msg_id}")
 
 
 if __name__ == "__main__":
